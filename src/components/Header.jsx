@@ -10,6 +10,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import {useNavigate} from "react-router-dom";
 
 const pages = ['Lista de la compra', 'Tiendas'];
 const settings = ['Perfil', 'Salir'];
@@ -17,9 +18,10 @@ const settings = ['Perfil', 'Salir'];
 function ResponsiveAppBar() {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const navigate = useNavigate();
 
-    const handleOpenNavMenu = (event) => {
-        setAnchorElNav(event.currentTarget);
+    const handleOpenNavMenu = () => {
+        navigate("/");
     };
     const handleOpenUserMenu = (event) => {
         setAnchorElUser(event.currentTarget);
