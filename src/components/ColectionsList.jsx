@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { db } from "../firebase"; // Importa tu configuración de Firebase
 import { collection, getDocs } from "firebase/firestore";
+import Container from "@mui/material/Container";
 
 function ListDocuments() {
     const [documents, setDocuments] = useState([]);
@@ -27,18 +28,18 @@ function ListDocuments() {
     }, []);
 
     if (loading) {
-        return <div>Cargando documentos...</div>;
+        return <Container>Cargando documentos...</Container>;
     }
 
     return (
-        <div>
-            <h1>Documents in Tiendas Collection</h1>
+        <Container>
+            <h1>Listado de tiendas registradas</h1>
             <ul>
                 {documents.map((doc) => (
                     <li key={doc.id}>{doc.id}</li> // Muestra un campo específico, por ejemplo 'name'
                 ))}
             </ul>
-        </div>
+        </Container>
     );
 }
 
