@@ -1,23 +1,51 @@
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import {useEffect, useState} from "react";
+import Container from "@mui/material/Container";
+import {addListItem, fetchShopListItems} from "../utils/ShopListUtils.js";
+import Button from "@mui/material/Button";
 
 function ShoppingList() {
-    const [items] = useState([
-        { id: 1, name: "Milk", purchased: false },
-        { id: 2, name: "Eggs", purchased: true },
-    ]);
+    const [list_items, setListItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    async function getListItems() {
+        setLoading(true);
+        const list = await fetchShopListItems();
+        setListItems(list);
+        setLoading(false);
+    }
+
+    async function addListItems() {
+        setLoading(true);
+        await addListItem({name: "Prueba", shop: "Tiendecita"})
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getListItems();
+    }, []);
+
+    if (loading) {
+        return (
+            <Container >
+                <span>Cargando ...</span>
+            </Container>
+        );
+    }
 
     return (
-        <div>
-            <h1>Shopping List</h1>
+        <Container>
+            <h1>Lista de la compra</h1>
+            <Button onClick={() => addListItems}>
+                Añadir
+            </Button>
             <ul>
-                {items.map((item) => (
+                {list_items.map((item) => (
                     <li key={item.id}>
-                        {item.name} {item.purchased ? "✔️" : "❌"}
+                        {item.name} {item.shop}
                     </li>
                 ))}
             </ul>
-        </div>
+        </Container>
     );
 }
 
