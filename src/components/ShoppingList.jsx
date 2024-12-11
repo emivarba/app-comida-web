@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import Container from "@mui/material/Container";
 import {addListItem, fetchShopListItems} from "../utils/ShopListUtils.js";
+import Button from "@mui/material/Button";
 
 function ShoppingList() {
     const [list_items, setListItems] = useState([]);
@@ -34,6 +35,9 @@ function ShoppingList() {
     return (
         <Container>
             <h1>Lista de la compra</h1>
+            <Button onClick={() => addListItems}>
+                Añadir
+            </Button>
             <ul>
                 {list_items.map((item) => (
                     <li key={item.id}>
