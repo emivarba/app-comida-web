@@ -11,18 +11,18 @@ export const fetchShopListItems = async () => {
         return docsList;
     } catch (error) {
         console.error("Error al obtener los documentos: ", error);
+        return []
     }
 };
 
 export const addListItem = async (item_data) => {
     try {
         const collection_ref = collection(db, "item-shop-list")
-        const query_data = await setDoc(doc(collection_ref), item_data);
+        await setDoc(doc(collection_ref), item_data);
 
-        console.log(query_data)
-
-        return 'Correcto';
+        return true;
     } catch (error) {
         console.error("Error al obtener los documentos: ", error);
+        return false;
     }
 }
