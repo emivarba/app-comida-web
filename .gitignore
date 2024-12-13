@@ -7,7 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-hosting.ZGlzdA.cache
+.firebase/hosting.*
 
 node_modules
 dist
