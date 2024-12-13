@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import {Alert, Dialog, Slide, Snackbar, TextField} from "@mui/material";
+import {Alert, Dialog, Select, Slide, Snackbar, TextField} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -9,13 +9,16 @@ import PropTypes from "prop-types";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
 import {addListItem} from "../../utils/ShopListUtils.js";
+import {useSelector} from "react-redux";
+import MenuItem from "@mui/material/MenuItem";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
-function DialogAddElement({open_dialog, setOpen}) {
+function DialogAddElement({open_dialog, setOpen, reloadList}) {
     let form_content;
+    const shops = useSelector((state) => state.shop.value)
 
     const [loading, setLoading] = useState(false);
     const [alert_data, setAlertData] = useState({
@@ -26,6 +29,7 @@ function DialogAddElement({open_dialog, setOpen}) {
     const [form_data, setFormData] = useState({
         product: '',
         shop: '',
+        shop_color: '#FFFFFF',
     });
 
     const handleFormChange = (event) => {
@@ -38,6 +42,7 @@ function DialogAddElement({open_dialog, setOpen}) {
     }
 
     const handleClose = () => {
+        reloadList()
         setOpen(false);
     };
 
@@ -64,13 +69,14 @@ function DialogAddElement({open_dialog, setOpen}) {
             }).finally( () => {
                 setFormData({
                     product: '',
-                    shop: '',
+                    shop: null,
                 });
                 setLoading(false);
             });
     };
 
-    form_content = <Container>
+    form_content =
+    <Container style={{"padding-top": '15px'}}>
         <Grid container spacing={2} direction="column">
             <Grid xs={12}>
                 <span>Producto</span>
@@ -87,14 +93,35 @@ function DialogAddElement({open_dialog, setOpen}) {
             </Grid>
             <Grid xs={12}>
                 <span>Tienda</span>
+                <Select
+                    id="shop"
+                    name="shop"
+                    fullWidth
+                    value={form_data.shop}
+                    onChange={handleFormChange}
+                    variant="outlined"
+                >
+                    {shops.map((shop) => (
+                        <MenuItem
+                            key={shop.id}
+                            value={shop.id}
+                        >
+                            {shop.id}
+                        </MenuItem>
+                    ))}
+                </Select>
+            </Grid>
+            <Grid size={5} sx={{display: form_data.shop ? 'block' : 'none'}}>
+                <span>Color tienda</span>
                 <TextField
                     required
                     margin="dense"
-                    id="shop"
-                    name="shop"
-                    placeholder="Tienda"
+                    id="shop-color"
+                    name="shop_color"
+                    placeholder="color"
                     fullWidth
-                    value={form_data.shop}
+                    type="color"
+                    value={form_data.shop_color}
                     onChange={handleFormChange}
                 />
             </Grid>
@@ -152,6 +179,7 @@ function DialogAddElement({open_dialog, setOpen}) {
 DialogAddElement.propTypes = {
     open_dialog: PropTypes.bool.isRequired,
     setOpen: PropTypes.func.isRequired,
+    reloadList: PropTypes.func.isRequired,
 }
 
 export default DialogAddElement;

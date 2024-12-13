@@ -1,12 +1,11 @@
 import {useEffect, useState} from "react";
-import Container from "@mui/material/Container";
-import {addListItem, fetchShopListItems} from "../utils/ShopListUtils.js";
-import Button from "@mui/material/Button";
+import {fetchShopListItems} from "../utils/ShopListUtils.js";
 import ShopListElement from "../components/ShopList/ShopListElement.jsx";
+import DialogAddElement from "../components/ShopList/DialogAddElement.jsx";
+import Container from "@mui/material/Container";
+import Button from "@mui/material/Button";
 import Grid from '@mui/material/Grid2';
 import "../styles/ShopList/ShoppingListView.scss"
-import {Dialog} from "@mui/material";
-import DialogAddElement from "../components/ShopList/DialogAddElement.jsx";
 
 function ShoppingListView() {
     const [list_items, setListItems] = useState([]);
@@ -63,6 +62,7 @@ function ShoppingListView() {
             <DialogAddElement
                 open_dialog={open_dialog}
                 setOpen={setDialogIsOpen}
+                reloadList={setListReload}
             ></DialogAddElement>
         </>
     );
