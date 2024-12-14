@@ -11,6 +11,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import {useNavigate} from "react-router-dom";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const pages = ['Lista de la compra', 'Tiendas'];
 const settings = ['Perfil', 'Salir'];
@@ -36,7 +37,7 @@ function ResponsiveAppBar() {
     };
 
     return (
-        <AppBar position="static">
+        <AppBar position="sticky">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
                     <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -87,7 +88,7 @@ function ResponsiveAppBar() {
                     <Box sx={{ flexGrow: 0 }}>
                         <Tooltip title="Open settings">
                             <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Opciones de usuario" src="/assets/react.svg" />
+                                <AccountCircleIcon />
                             </IconButton>
                         </Tooltip>
                         <Menu

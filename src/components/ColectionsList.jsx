@@ -12,7 +12,6 @@ function ListDocuments() {
             const querySnapshot = await getDocs(collection(db, "Tiendas"));
             const docsList = [];
             querySnapshot.forEach((doc) => {
-                console.log(doc.id);
                 docsList.push({ id: doc.id, ...doc.data() }); // Agrega el documento y sus datos
             });
             setDocuments(docsList); // Actualiza el estado con los documentos obtenidos
