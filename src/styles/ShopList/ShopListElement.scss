@@ -1,5 +1,19 @@
 .shop-list-element {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-radius: 8px;
-  border: 1px solid #000;
+  border: 1px;
   padding: 10px 20px;
+
+  .item-name {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .shop-name {
+    font-size: 12px;
+  }
 }

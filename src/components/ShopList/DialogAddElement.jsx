@@ -11,6 +11,8 @@ import Grid from "@mui/material/Grid2";
 import {addListItem} from "../../utils/ShopListUtils.js";
 import {useSelector} from "react-redux";
 import MenuItem from "@mui/material/MenuItem";
+import CloseIcon from "@mui/icons-material/Close";
+
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -68,15 +70,15 @@ function DialogAddElement({open_dialog, setOpen, reloadList}) {
 
             }).finally( () => {
                 setFormData({
+                    ...form_data,
                     product: '',
-                    shop: null,
                 });
                 setLoading(false);
             });
     };
 
     form_content =
-    <Container style={{"padding-top": '15px'}}>
+    <Container style={{"paddingTop": '15px'}}>
         <Grid container spacing={2} direction="column">
             <Grid xs={12}>
                 <span>Producto</span>
@@ -146,12 +148,15 @@ function DialogAddElement({open_dialog, setOpen, reloadList}) {
                         onClick={handleClose}
                         aria-label="close"
                     >
-                        X
+                        <CloseIcon />
                     </IconButton>
                     <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                         Añadir elemento
                     </Typography>
-                    <Button autoFocus color="inherit" onClick={handleSaveProduct}>
+                    <Button
+                        disabled={form_data.shop === ''}
+                        color="inherit"
+                        onClick={handleSaveProduct}>
                         Guardar
                     </Button>
                 </Toolbar>

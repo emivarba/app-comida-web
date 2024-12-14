@@ -1,17 +1,32 @@
 import {useEffect, useState} from "react";
-import {fetchShopListItems} from "../utils/ShopListUtils.js";
+import {deleteListItem, fetchShopListItems} from "../utils/ShopListUtils.js";
 import ShopListElement from "../components/ShopList/ShopListElement.jsx";
 import DialogAddElement from "../components/ShopList/DialogAddElement.jsx";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Grid from '@mui/material/Grid2';
 import "../styles/ShopList/ShoppingListView.scss"
+import {useSelector} from "react-redux";
 
 function ShoppingListView() {
     const [list_items, setListItems] = useState([]);
     const [loading, setLoading] = useState(true);
     const [open_dialog, setDialogIsOpen] = useState(false);
     const [list_reload, setListReload] = useState(true);
+    const shops = useSelector((state) => state.shop.value);
+
+    function getShopColor(shop_name) {
+        let shop_item = shops.find(shop => shop.id.toUpperCase() === shop_name.toUpperCase());
+
+        return shop_item ? shop_item.color : "#FFFFFF";
+    }
+
+    function handleDelete(id){
+        deleteListItem(id)
+            .then(() => {
+                setListReload(!list_reload)
+            })
+    }
 
     useEffect(() => {
         setLoading(true);
@@ -51,8 +66,11 @@ function ShoppingListView() {
                             {list_items.map((item) => (
                                 <ShopListElement
                                     key={item.id}
+                                    id={item.id}
                                     shop={item.shop}
                                     name={item.name}
+                                    color={getShopColor(item.shop)}
+                                    handleDelete={handleDelete}
                                 />
                             ))}
                         </>
