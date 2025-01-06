@@ -9,6 +9,7 @@ import {fetchShops} from "./utils/ShopUtils.js";
 import {useDispatch} from "react-redux";
 import {replaceShopList} from "./features/shops/shopsSlice.js";
 import Container from "@mui/material/Container";
+import TasksList from "./views/TasksList.jsx";
 
 function App() {
     const dispatch = useDispatch()
@@ -40,6 +41,7 @@ function App() {
                 <Route path="/" element={<HomeView />} ></Route>
                 <Route path="/tiendas" element={<ListCollections />} ></Route>
                 <Route path="/lista-compra" element={<ShoppingListView />} ></Route>
+                <Route path="/tareas" element={<TasksList />} ></Route>
             </Routes>
 
         </div>

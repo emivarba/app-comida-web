@@ -7,4 +7,8 @@ export const routes_home_page = [
         path: '/tiendas',
         name: 'Tiendas',
     },
+    {
+        path: '/tareas',
+        name: 'Tareas',
+    },
 ]
