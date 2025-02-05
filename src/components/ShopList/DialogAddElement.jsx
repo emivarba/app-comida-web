@@ -8,7 +8,7 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
-import {addListItem} from "../../utils/ShopListUtils.js";
+import {addListItem} from "../../utils/ShopListUtils.ts";
 import {useSelector} from "react-redux";
 import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";

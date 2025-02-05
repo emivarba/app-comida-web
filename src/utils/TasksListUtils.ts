@@ -1,12 +1,17 @@
 import {collection, deleteDoc, doc, getDocs, setDoc} from "firebase/firestore";
 import {db} from "../firebase.js";
 
-export const fetchTasks = async () => {
+export interface taskInfo {
+    id: string,
+    action: string,
+}
+
+export const fetchTasks = async (): Promise<taskInfo[]> => {
     try {
         const querySnapshot = await getDocs(collection(db, "Tareas"));
-        const docsList = [];
+        const docsList: taskInfo[] = [];
         querySnapshot.forEach((doc) => {
-            docsList.push({ id: doc.id, ...doc.data() });
+            docsList.push({ id: doc.id, action: doc.data().action });
         });
         return docsList;
     } catch (error) {
@@ -15,7 +20,7 @@ export const fetchTasks = async () => {
     }
 }
 
-export const addTask = async (task_data) => {
+export const addTask = async (task_data: string) => {
     try {
         const collection_ref = collection(db, "Tareas")
         await setDoc(doc(collection_ref), {action: task_data});
@@ -27,7 +32,7 @@ export const addTask = async (task_data) => {
     }
 }
 
-export const deleteTask = async (item_id) => {
+export const deleteTask = async (item_id: string) => {
     try {
         await deleteDoc(doc(db, "Tareas",item_id));
 
