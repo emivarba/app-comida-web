@@ -1,19 +1,21 @@
 import {useEffect, useState} from "react";
 import Container from "@mui/material/Container";
-import {addTask, deleteTask, fetchTasks} from "../utils/TasksListUtils.js";
+import {addTask, deleteTask, fetchTasks, taskInfo} from "../utils/TasksListUtils.ts";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid2";
 import "../styles/TasksList/TasksListView.scss"
 import {TextField} from "@mui/material";
-import TasksListElement from "../components/TasksList/TasksListElement.jsx";
+import TasksListElement from "../components/TasksList/TasksListElement.tsx"
+
+
 
 function TasksList() {
-    const [tasks_list, setTasksList] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [list_reload, setListReload] = useState(true);
-    const [task_data, setTaskData] = useState("");
+    const [tasks_list, setTasksList] = useState<taskInfo[]>([]);
+    const [loading, setLoading] = useState<boolean>(true);
+    const [list_reload, setListReload] = useState<boolean>(true);
+    const [task_data, setTaskData] = useState<string>("");
 
-    const handleFormChange = (event) => {
+    const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const {value} = event.target;
 
         setTaskData(value)
@@ -29,7 +31,7 @@ function TasksList() {
             })
     }
 
-    function handleDelete(id){
+    function handleDelete(id: string){
         deleteTask(id)
             .then(() => {
                 setListReload(!list_reload)
@@ -39,7 +41,7 @@ function TasksList() {
     useEffect(() => {
         setLoading(true);
         fetchTasks()
-            .then(result_list => {
+            .then((result_list: taskInfo[]) => {
                 setTasksList(result_list);
             })
             .finally(() => {
@@ -84,7 +86,7 @@ function TasksList() {
                 <div className="list-body">
                     <Grid container spacing={2} direction="column">
                         <>
-                            {tasks_list.map((item) => (
+                            {tasks_list.map((item: taskInfo) => (
                                 <TasksListElement
                                     key={item.id}
                                     id={item.id}

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "target": "ESNext",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "jsx": "react"
+  },
+  "exclude": [
+    "src/**/*.js",   // Ignorar todos los archivos .js dentro de src
+    "src/**/*.scss"  // Ignorar todos los archivos .scss dentro de src
+  ],
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
+}

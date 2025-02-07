@@ -3,7 +3,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import PropTypes from "prop-types";
 import "../../styles/TasksList/TaskElement.scss"
 
-function TasksListElement({id,action, handleDelete}){
+interface TasksListElementParams {
+    id: string,
+    action: string,
+    handleDelete: (id: string) => void,
+}
+
+function TasksListElement({id,action, handleDelete}: TasksListElementParams ){
     function deleteListItem() {
         handleDelete(id)
     }

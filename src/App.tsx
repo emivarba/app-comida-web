@@ -1,15 +1,14 @@
-import ListCollections from "./components/ColectionsList.jsx";
-import './styles/main.scss';
+import ListCollections from "./components/ColectionsList.tsx";
 import {Route, Routes} from "react-router-dom";
-import ShoppingListView from "./views/ShoppingListView.jsx";
-import Header from "./components/Header.jsx";
-import HomeView from "./views/HomeView.jsx";
+import ShoppingListView from "./views/ShoppingListView.tsx";
+import Header from "./components/Header.tsx";
+import HomeView from "./views/HomeView.tsx";
 import {useEffect, useState} from "react";
-import {fetchShops} from "./utils/ShopUtils.js";
+import {fetchShops} from "./utils/ShopUtils.ts";
 import {useDispatch} from "react-redux";
-import {replaceShopList} from "./features/shops/shopsSlice.js";
+import {replaceShopList} from "./features/shops/shopsSlice.ts";
 import Container from "@mui/material/Container";
-import TasksList from "./views/TasksList.jsx";
+import TasksList from "./views/TasksList.tsx";
 
 function App() {
     const dispatch = useDispatch()
@@ -43,7 +42,6 @@ function App() {
                 <Route path="/lista-compra" element={<ShoppingListView />} ></Route>
                 <Route path="/tareas" element={<TasksList />} ></Route>
             </Routes>
-
         </div>
     );
 }
