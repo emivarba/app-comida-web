@@ -3,7 +3,15 @@ import PropTypes from "prop-types";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function ShopListElement({id, name, shop, color, handleDelete}){
+export interface ShopListElementParams {
+    id: string,
+    name: string,
+    shop: string,
+    color: string,
+    handleDelete: (id: string) => void
+}
+
+export function ShopListElement({id, name, shop, color, handleDelete}: ShopListElementParams){
     function deleteListItem() {
         handleDelete(id)
     }
@@ -35,5 +43,3 @@ ShopListElement.propTypes = {
     color: PropTypes.string.isRequired,
     handleDelete: PropTypes.func.isRequired,
 }
-
-export default ShopListElement;

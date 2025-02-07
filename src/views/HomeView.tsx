@@ -1,6 +1,6 @@
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import {routes_home_page} from "../utils/RoutesHome.js";
+import {routes_home_page} from "../utils/RoutesHome.ts";
 import {useNavigate} from "react-router-dom";
 import "../styles/HomeView.scss";
 
@@ -8,7 +8,7 @@ import "../styles/HomeView.scss";
 function HomeView(){
     const navigate = useNavigate();
 
-    function goToPage(path){
+    function goToPage(path:string){
         return () => {
             navigate(path)
         }
