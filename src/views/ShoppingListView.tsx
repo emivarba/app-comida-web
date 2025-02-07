@@ -1,27 +1,28 @@
 import {useEffect, useState} from "react";
-import {deleteListItem, fetchShopListItems} from "../utils/ShopListUtils.js";
-import ShopListElement from "../components/ShopList/ShopListElement.jsx";
-import DialogAddElement from "../components/ShopList/DialogAddElement.jsx";
+import {deleteListItem, fetchShopListItems, ItemShopList} from "../utils/ShopListUtils.js";
+import {ShopListElement} from "../components/ShopList/ShopListElement.tsx";
+import DialogAddElement from "../components/ShopList/DialogAddElement.js";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Grid from '@mui/material/Grid2';
 import "../styles/ShopList/ShoppingListView.scss"
-import {useSelector} from "react-redux";
+import { useAppSelector } from "../utils/hooks.ts";
+import { Shop } from "../features/shops/shopsSlice.ts";
 
 function ShoppingListView() {
-    const [list_items, setListItems] = useState([]);
+    const [list_items, setListItems] = useState<ItemShopList[]>([]);
     const [loading, setLoading] = useState(true);
     const [open_dialog, setDialogIsOpen] = useState(false);
     const [list_reload, setListReload] = useState(true);
-    const shops = useSelector((state) => state.shop.value);
+    const shops = useAppSelector(state => state.shop.value);
 
-    function getShopColor(shop_name) {
-        let shop_item = shops.find(shop => shop.id.toUpperCase() === shop_name.toUpperCase());
+    function getShopColor(shop_name: string) {
+        const shop_item: Shop | undefined = shops.find(shop => shop.id.toUpperCase() === shop_name.toUpperCase());
 
         return shop_item ? shop_item.color : "#FFFFFF";
     }
 
-    function handleDelete(id){
+    function handleDelete(id: string){
         deleteListItem(id)
             .then(() => {
                 setListReload(!list_reload)
@@ -63,7 +64,7 @@ function ShoppingListView() {
                 <div style={{ minHeight: '100vh' }}>
                     <Grid container spacing={2} direction="column">
                         <>
-                            {list_items.map((item) => (
+                            {list_items.map((item: ItemShopList) => (
                                 <ShopListElement
                                     key={item.id}
                                     id={item.id}

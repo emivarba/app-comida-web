@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useState} from "react";
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,14 +17,14 @@ const pages = ['Lista de la compra', 'Tiendas'];
 const settings = ['Perfil', 'Salir'];
 
 function ResponsiveAppBar() {
-    const [anchorElNav, setAnchorElNav] = React.useState(null);
-    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+    const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
     const navigate = useNavigate();
 
     const handleOpenNavMenu = () => {
         navigate("/");
     };
-    const handleOpenUserMenu = (event) => {
+    const handleOpenUserMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorElUser(event.currentTarget);
     };
 
@@ -47,7 +47,7 @@ function ResponsiveAppBar() {
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
                             onClick={handleOpenNavMenu}
-                            color="white"
+                            sx = {{color: "white"}}
                         >
                             <Avatar alt="Opciones de usuario" src="/assets/vite.svg" />
                         </IconButton>

@@ -1,15 +1,26 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+
+export interface Shop {
+    id: string,
+    color: string
+}
+
+interface ShopsState {
+    value: Shop[]
+}
+
+const initialState: ShopsState = {
+    value: [],
+};
 
 export const shopsSlice = createSlice({
     name: 'shops',
-    initialState: {
-        value: [],
-    },
+    initialState,
     reducers: {
-        addNewShop: (state, action) => {
+        addNewShop: (state, action: PayloadAction<Shop>) => {
             state.value.push(action.payload);
         },
-        replaceShopList: (state, action) => {
+        replaceShopList: (state, action: PayloadAction<Shop[]>) => {
             state.value = action.payload;
         }
     }

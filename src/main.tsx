@@ -6,7 +6,7 @@ import '../vite-env.d.ts'
 import './styles/main.scss'
 import App from './App.tsx'
 import {Provider} from "react-redux";
-import store from './app/store.ts'
+import {store} from './app/store.ts'
 
 const rootElement = document.getElementById('root');
 

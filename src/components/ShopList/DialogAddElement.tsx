@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import {Alert, Dialog, Select, Slide, Snackbar, TextField} from "@mui/material";
+import {Alert, Dialog, Select, SelectChangeEvent, Slide, Snackbar, TextField} from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -9,22 +9,38 @@ import PropTypes from "prop-types";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid2";
 import {addListItem} from "../../utils/ShopListUtils.ts";
-import {useSelector} from "react-redux";
 import MenuItem from "@mui/material/MenuItem";
 import CloseIcon from "@mui/icons-material/Close";
+import { TransitionProps } from "@mui/material/transitions";
+import { useAppSelector } from "../../utils/hooks.ts";
 
 
-const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
+const Transition = React.forwardRef(function Transition(
+    props: TransitionProps & { children: React.ReactElement },
+    ref: React.Ref<unknown>
+  ) {
+        return <Slide direction="up" ref={ref} {...props} />;
+    });
 
-function DialogAddElement({open_dialog, setOpen, reloadList}) {
+interface DialogAddElementParams {
+    open_dialog: boolean,
+    setOpen: (status: boolean) => void,
+    reloadList: () => void,
+}
+
+interface AlertData {
+    type: "success" | "info" | "warning" | "error";
+    message: string;
+    is_open: boolean;
+}
+
+function DialogAddElement({open_dialog, setOpen, reloadList}: DialogAddElementParams) {
     let form_content;
-    const shops = useSelector((state) => state.shop.value)
+    const shops = useAppSelector((state) => state.shop.value)
 
     const [loading, setLoading] = useState(false);
-    const [alert_data, setAlertData] = useState({
-        type: "",
+    const [alert_data, setAlertData] = useState<AlertData>({
+        type: "success",
         message: "",
         is_open: false,
     });
@@ -34,14 +50,23 @@ function DialogAddElement({open_dialog, setOpen, reloadList}) {
         shop_color: '#FFFFFF',
     });
 
-    const handleFormChange = (event) => {
-        const {name, value} = event.target;
-
-        setFormData({
-            ...form_data,
-            [name]: value,
-        })
-    }
+    const handleFormChange = (
+        event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+      ) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      };
+      
+      const handleSelectChange = (event: SelectChangeEvent<string>) => {
+        const { name, value } = event.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      };
 
     const handleClose = () => {
         reloadList()
@@ -80,7 +105,7 @@ function DialogAddElement({open_dialog, setOpen, reloadList}) {
     form_content =
     <Container style={{"paddingTop": '15px'}}>
         <Grid container spacing={2} direction="column">
-            <Grid xs={12}>
+            <Grid >
                 <span>Producto</span>
                 <TextField
                     required
@@ -93,14 +118,14 @@ function DialogAddElement({open_dialog, setOpen, reloadList}) {
                     onChange={handleFormChange}
                 />
             </Grid>
-            <Grid xs={12}>
+            <Grid>
                 <span>Tienda</span>
                 <Select
                     id="shop"
                     name="shop"
                     fullWidth
                     value={form_data.shop}
-                    onChange={handleFormChange}
+                    onChange={handleSelectChange}
                     variant="outlined"
                 >
                     {shops.map((shop) => (
