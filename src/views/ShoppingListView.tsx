@@ -22,6 +22,10 @@ function ShoppingListView() {
         return shop_item ? shop_item.color : "#FFFFFF";
     }
 
+    function manualReload(){
+        setListReload(!list_reload)
+    }
+
     function handleDelete(id: string){
         deleteListItem(id)
             .then(() => {
@@ -51,37 +55,37 @@ function ShoppingListView() {
     return (
         <>
             <Container className="shopping-list-container">
-                <h1>Lista de la compra</h1>
+                <div className="title-container">
+                    <h1>Lista de la compra</h1>
 
-                <Button
-                    className="button-add"
-                    variant="contained"
-                    onClick={() => {setDialogIsOpen(true)}}
-                >
-                    Añadir
-                </Button>
-
-                <div style={{ minHeight: '100vh' }}>
-                    <Grid container spacing={2} direction="column">
-                        <>
-                            {list_items.map((item: ItemShopList) => (
-                                <ShopListElement
-                                    key={item.id}
-                                    id={item.id}
-                                    shop={item.shop}
-                                    name={item.name}
-                                    color={getShopColor(item.shop)}
-                                    handleDelete={handleDelete}
-                                />
-                            ))}
-                        </>
-                    </Grid>
+                    <Button
+                        className="button-add"
+                        variant="contained"
+                        onClick={() => {setDialogIsOpen(true)}}
+                    >
+                        Añadir
+                    </Button>
                 </div>
+                
+                <Grid container spacing={2} direction="column">
+                    <>
+                        {list_items.map((item: ItemShopList) => (
+                            <ShopListElement
+                                key={item.id}
+                                id={item.id}
+                                shop={item.shop}
+                                name={item.name}
+                                color={getShopColor(item.shop)}
+                                handleDelete={handleDelete}
+                            />
+                        ))}
+                    </>
+                </Grid>
             </Container>
             <DialogAddElement
                 open_dialog={open_dialog}
                 setOpen={setDialogIsOpen}
-                reloadList={setListReload}
+                reloadList={manualReload}
             ></DialogAddElement>
         </>
     );

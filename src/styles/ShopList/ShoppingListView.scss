@@ -1,11 +1,10 @@
 .shopping-list-container {
   position: relative;
 
-  .button-add {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1;
+  .title-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 
