@@ -1,4 +1,3 @@
-import ListCollections from "./components/ColectionsList.tsx";
 import {Route, Routes} from "react-router-dom";
 import ShoppingListView from "./views/ShoppingListView.tsx";
 import Header from "./components/Header.tsx";
@@ -9,6 +8,8 @@ import {useDispatch} from "react-redux";
 import {replaceShopList} from "./features/shops/shopsSlice.ts";
 import Container from "@mui/material/Container";
 import TasksList from "./views/TasksList.tsx";
+import ShopsView from "./views/ShopsView.tsx";
+import SudokuView from "./views/SudokuView.tsx";
 
 function App() {
     const dispatch = useDispatch()
@@ -38,9 +39,10 @@ function App() {
             <Header></Header>
             <Routes>
                 <Route path="/" element={<HomeView />} ></Route>
-                <Route path="/tiendas" element={<ListCollections />} ></Route>
+                <Route path="/tiendas" element={<ShopsView />} ></Route>
                 <Route path="/lista-compra" element={<ShoppingListView />} ></Route>
                 <Route path="/tareas" element={<TasksList />} ></Route>
+                <Route path="/sudoku" element={<SudokuView />} ></Route>
             </Routes>
         </div>
     );
