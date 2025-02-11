@@ -25,7 +25,7 @@ function TasksList() {
         setLoading(true);
         addTask(task_data)
             .finally(() => {
-                setTaskData("")
+                setTaskData("");
                 setLoading(false);
                 setListReload(!list_reload);
             })
@@ -34,7 +34,7 @@ function TasksList() {
     function handleDelete(id: string){
         deleteTask(id)
             .then(() => {
-                setListReload(!list_reload)
+                setTasksList(prev => prev.filter(item => item.id !== id))
             })
     }
 

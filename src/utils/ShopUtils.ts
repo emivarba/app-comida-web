@@ -18,7 +18,7 @@ export const fetchShops = async () => {
     }
 };
 
-export const addShop = async (shopData: Omit<Shop, "id">) => {
+export const addShop = async (shopData: Shop) => {
     try {
         const collectionRef = collection(db, "Tiendas")
         await setDoc(doc(collectionRef), shopData);
