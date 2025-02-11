@@ -1,0 +1,17 @@
+.shops-list-view {
+    .shop-data {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px;
+        border: 1px solid gray;
+        border-radius: 8px;
+        margin-bottom: 10px;
+    
+        .shop-data__title {
+            font-weight: bold;
+        }
+    }
+}
+

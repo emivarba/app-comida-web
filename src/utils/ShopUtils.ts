@@ -1,4 +1,4 @@
-import {collection, getDocs} from "firebase/firestore";
+import {collection, deleteDoc, doc, getDocs, setDoc} from "firebase/firestore";
 import {db} from "../firebase.ts";
 import { Shop } from "../features/shops/shopsSlice.ts";
 
@@ -17,3 +17,26 @@ export const fetchShops = async () => {
         return []
     }
 };
+
+export const addShop = async (shopData: Omit<Shop, "id">) => {
+    try {
+        const collectionRef = collection(db, "Tiendas")
+        await setDoc(doc(collectionRef), shopData);
+
+        return true;
+    } catch (error) {
+        console.error("Error al obtener los documentos: ", error);
+        return false;
+    }
+}
+
+export const deleteShop = async (itemId: string) => {
+    try {
+        await deleteDoc(doc(db, "Tiendas",itemId));
+
+        return true;
+    } catch (error) {
+        console.error("Error al eliminar el documento: ", error);
+        return false;
+    }
+}
