@@ -25,7 +25,7 @@ function TasksList() {
         setLoading(true);
         addTask(task_data)
             .finally(() => {
-                setTaskData("")
+                setTaskData("");
                 setLoading(false);
                 setListReload(!list_reload);
             })
@@ -34,7 +34,7 @@ function TasksList() {
     function handleDelete(id: string){
         deleteTask(id)
             .then(() => {
-                setListReload(!list_reload)
+                setTasksList(prev => prev.filter(item => item.id !== id))
             })
     }
 
@@ -58,47 +58,45 @@ function TasksList() {
     }
 
     return (
-        <>
-            <Container className="task-list-container">
-                <h1>Lista de tareas</h1>
+        <Container className="task-list-container">
+            <h1>Lista de tareas</h1>
 
-                <div className="new-task-container">
-                    <TextField
-                        required
-                        margin="dense"
-                        id="task"
-                        name="task"
-                        placeholder="Nueva tarea"
-                        value={task_data}
-                        fullWidth
-                        onChange={handleFormChange}
-                    />
-                    <Button
-                        variant="contained"
-                        onClick={() => {
-                            handleNewTask()
-                        }}
-                    >
-                        Añadir
-                    </Button>
-                </div>
+            <div className="new-task-container">
+                <TextField
+                    required
+                    margin="dense"
+                    id="task"
+                    name="task"
+                    placeholder="Nueva tarea"
+                    value={task_data}
+                    fullWidth
+                    onChange={handleFormChange}
+                />
+                <Button
+                    variant="contained"
+                    onClick={() => {
+                        handleNewTask()
+                    }}
+                >
+                    Añadir
+                </Button>
+            </div>
 
-                <div className="list-body">
-                    <Grid container spacing={2} direction="column">
-                        <>
-                            {tasks_list.map((item: taskInfo) => (
-                                <TasksListElement
-                                    key={item.id}
-                                    id={item.id}
-                                    action={item.action}
-                                    handleDelete={handleDelete}
-                                />
-                            ))}
-                        </>
-                    </Grid>
-                </div>
-            </Container>
-        </>
+            <div className="list-body">
+                <Grid container spacing={2} direction="column">
+                    <>
+                        {tasks_list.map((item: taskInfo) => (
+                            <TasksListElement
+                                key={item.id}
+                                id={item.id}
+                                action={item.action}
+                                handleDelete={handleDelete}
+                            />
+                        ))}
+                    </>
+                </Grid>
+            </div>
+        </Container>
     )
 }
 

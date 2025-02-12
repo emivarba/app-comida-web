@@ -22,10 +22,15 @@ export const shopsSlice = createSlice({
         },
         replaceShopList: (state, action: PayloadAction<Shop[]>) => {
             state.value = action.payload;
-        }
+        },
+        updateShop: (state, action: PayloadAction<{ id: string; updatedData: Partial<Shop> }>) => {
+            state.value = state.value.map(shop =>
+              shop.id === action.payload.id ? { ...shop, ...action.payload.updatedData } : shop
+            );
+        },
     }
 })
 
-export const {addNewShop, replaceShopList} = shopsSlice.actions;
+export const {addNewShop, replaceShopList, updateShop} = shopsSlice.actions;
 
 export default shopsSlice.reducer;
