@@ -1,4 +1,4 @@
-import {collection, deleteDoc, doc, getDocs, setDoc} from "firebase/firestore";
+import {collection, deleteDoc, doc, getDocs, setDoc, updateDoc} from "firebase/firestore";
 import {db} from "../firebase.ts";
 import { Shop } from "../features/shops/shopsSlice.ts";
 
@@ -18,16 +18,27 @@ export const fetchShops = async () => {
     }
 };
 
-export const addShop = async (shopData: Omit<Shop, "id">) => {
+export const addShop = async (shopData: Shop) => {
     try {
-        const collectionRef = collection(db, "Tiendas")
-        await setDoc(doc(collectionRef), shopData);
+        await setDoc(doc(db, "Tiendas", shopData.id), shopData as Omit<Shop, "id">);
 
         return true;
     } catch (error) {
         console.error("Error al obtener los documentos: ", error);
         return false;
     }
+}
+
+export async function updateShop(shopId: string, updatedData: Partial<Omit<Shop, "id">>) {
+    try {
+        const shopRef = doc(db, "Tiendas", shopId);
+        await updateDoc(shopRef, updatedData);
+    
+        return true;
+      } catch (error) {
+        console.error("Error al actualizar la tienda: ", error);
+        return false;
+      }
 }
 
 export const deleteShop = async (itemId: string) => {
