@@ -25,7 +25,6 @@ function DialogAddShop({openDialog, setOpen, reloadList}: DialogAddShopParams) {
 
     function handleFormChange( event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> | SelectChangeEvent<string>) {
         const { name, value } = event.target;
-        console.log({ name, value })
         setFormData((prevData) => ({
           ...prevData,
           [name]: value,
@@ -36,7 +35,6 @@ function DialogAddShop({openDialog, setOpen, reloadList}: DialogAddShopParams) {
         const result = await addShop({id: form_data.name, color: form_data.color})
             
         if(result) {
-            console.log({id: form_data.name, color: form_data.color})
             dispatch(addNewShop({id: form_data.name, color: form_data.color}))
 
             setFormData({
