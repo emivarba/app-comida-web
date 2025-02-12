@@ -11,4 +11,8 @@ export const routes_home_page = [
         path: '/tareas',
         name: 'Tareas',
     },
+    {
+        path: '/sudoku',
+        name: 'Sudoku',
+    },
 ]

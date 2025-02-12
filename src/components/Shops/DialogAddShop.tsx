@@ -5,6 +5,8 @@ import PropTypes from "prop-types";
 import Grid from "@mui/material/Grid2";
 import { GenericDialogForm } from "../Generics/GenericDialogForm.tsx";
 import { addShop } from "../../utils/ShopUtils.ts";
+import { useDispatch } from "react-redux";
+import { addNewShop } from "../../features/shops/shopsSlice.ts";
 
 
 interface DialogAddShopParams {
@@ -15,14 +17,15 @@ interface DialogAddShopParams {
 
 
 function DialogAddShop({openDialog, setOpen, reloadList}: DialogAddShopParams) {
+    const dispatch = useDispatch();
     const [form_data, setFormData] = useState({
         name: '',
-        color: '',
+        color: '#ffffff',
     });
 
     function handleFormChange( event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement> | SelectChangeEvent<string>) {
         const { name, value } = event.target;
-        
+        console.log({ name, value })
         setFormData((prevData) => ({
           ...prevData,
           [name]: value,
@@ -33,6 +36,9 @@ function DialogAddShop({openDialog, setOpen, reloadList}: DialogAddShopParams) {
         const result = await addShop({id: form_data.name, color: form_data.color})
             
         if(result) {
+            console.log({id: form_data.name, color: form_data.color})
+            dispatch(addNewShop({id: form_data.name, color: form_data.color}))
+
             setFormData({
                 name: "",
                 color: "",

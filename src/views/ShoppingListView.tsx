@@ -13,7 +13,7 @@ function ShoppingListView() {
     const [openDialog, setDialogIsOpen] = useState(false);
     const [listReload, setListReload] = useState(true);
     const shops = useAppSelector(state => state.shop.value);
-
+    
     const {data: shopsList, loading, setData: setShopsList} = useFetch<ItemShopList[]>(fetchShopListItems, listReload)
 
     function getShopColor(shop_name: string) {
