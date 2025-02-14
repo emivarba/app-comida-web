@@ -5,14 +5,25 @@ import { useAppSelector } from "../utils/hooks";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../app/store";
 import { updateCell } from "../features/sudoku/sudokuSlice";
+import { useState } from "react";
 
 function SudokuView() {
     const dispatch = useDispatch<AppDispatch>()
     const { board, puzzle, solution } = useAppSelector((state) => state.sudoku);
+    const [selectedNumber, setSelectedNumber] = useState("");
+
 
     function dragStart(event: React.DragEvent): void {
         const number : string = event.currentTarget.textContent || "0"
         event.dataTransfer.setData("text", number);
+    }
+
+    function touchStart(event: React.TouchEvent) {
+        const number: string = event.currentTarget.textContent || "0";
+        
+        localStorage.setItem("touchedItem", number);
+        setSelectedNumber(number)
+        console.log("Dato guardado:", number);
     }
 
     function handleCellUpdate(row: number, col: number, value: string) {
@@ -30,13 +41,14 @@ function SudokuView() {
 
     function naturalNumbers() {
         return (
-          <div className="sudoku--numbers">
+          <div className="sudoku-numbers">
             {Array.from({ length: 9 }, (_, i) => (
                 <div
                     key={i}
-                    className="number-options" 
+                    className={`number-options ${selectedNumber === (i+1).toString() ? "sudoku-numbers--selected" : ""}`} 
                     draggable={true} 
-                    onDragStart={dragStart} 
+                    onDragStart={dragStart}
+                    onTouchStart={touchStart}
                 >
                     {i + 1}
                 </div>
