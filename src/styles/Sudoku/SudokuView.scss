@@ -54,7 +54,7 @@
     }
 }
 
-.sudoku--numbers {
+.sudoku-numbers {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
@@ -68,5 +68,10 @@
         font-size: 20px;
         padding: 10px 20px;
         cursor: pointer;
+    }
+
+    .sudoku-numbers--selected {
+        background-color: #CBD5E1;
+        font-weight: bold;
     }
 }
