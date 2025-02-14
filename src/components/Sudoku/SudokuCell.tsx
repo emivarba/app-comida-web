@@ -27,9 +27,17 @@ function SudokuCell({cellValue, cellRow, cellColumn, fillable, onCellUpdate}: Su
         event.currentTarget.classList.remove('drop-zone');
     }
 
+    const handleTouchEnd = (event: React.TouchEvent<HTMLDivElement>) => {
+        event.preventDefault();
+        
+        const number = localStorage.getItem("touchedItem") || "0";
+        onCellUpdate(cellRow, cellColumn, number);
+        localStorage.removeItem("touchedItem");
+      };
+
     if(fillable){
         cellElement = (
-            <div className="sudoku--cell" onDrop={drop} onDragOver={allowDrop} onDragLeave={removeDragClass}>
+            <div className="sudoku--cell" onDrop={drop} onTouchEnd={handleTouchEnd} onDragOver={allowDrop} onDragLeave={removeDragClass}>
                 {formatedValue}
             </div>
         )
