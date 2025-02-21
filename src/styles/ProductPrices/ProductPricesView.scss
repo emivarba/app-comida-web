@@ -39,3 +39,23 @@
     }
 }
 
+.product-data {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    .product-data__shop, .product-data__price {
+        width: 35%;
+    }
+
+    .product-data__titles {
+        display: flex;
+        flex-basis: 100%;
+    }
+}
+
+.product-name {
+    margin-bottom: 1vh;
+}
+

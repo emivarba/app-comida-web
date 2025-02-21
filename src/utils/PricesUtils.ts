@@ -1,4 +1,4 @@
-import { collection, getDocs} from "firebase/firestore";
+import { collection, doc, getDocs, setDoc} from "firebase/firestore";
 import { db } from "../firebase";
 
 export interface ProductPrices {
@@ -22,4 +22,16 @@ export async function fetchPrices() {
         console.error("Error al obtener los documentos: ", error);
         return []
     }   
+}
+
+export async function saveProductPrice(productData: Omit<ProductPrices, "id"> ) {
+    try {
+            const collection_ref = collection(db, "prices")
+            await setDoc(doc(collection_ref), productData);
+    
+            return true;
+        } catch (error) {
+            console.error("Error al obtener los documentos: ", error);
+            return false;
+        }
 }
