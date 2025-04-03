@@ -4,7 +4,7 @@ import {ShopListElement} from "../components/ShopListItems/ShopListElement.tsx";
 import DialogAddShopItem from "../components/ShopListItems/DialogAddShopItem.js";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
-import Grid from '@mui/material/Grid2';
+import Grid from '@mui/material/Grid';
 import "../styles/ShopList/ShoppingListView.scss"
 import { useAppSelector, useFetch } from "../utils/hooks.ts";
 import { Shop } from "../features/shops/shopsSlice.ts";
