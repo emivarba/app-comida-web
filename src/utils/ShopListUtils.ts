@@ -1,4 +1,4 @@
-import {collection, doc, getDocs, setDoc, deleteDoc} from "firebase/firestore";
+import {collection, doc, getDocs, setDoc, deleteDoc, query, orderBy} from "firebase/firestore";
 import {db} from "../firebase.js";
 
 export interface ItemShopList {
@@ -9,7 +9,8 @@ export interface ItemShopList {
 
 export const fetchShopListItems = async (): Promise<ItemShopList[]> => {
     try {
-        const querySnapshot = await getDocs(collection(db, "item-shop-list"));
+        const docsQuery = query(collection(db, "item-shop-list"), orderBy("shop", "desc"));
+        const querySnapshot = await getDocs(docsQuery);
         const docsList: ItemShopList[] = [];
 
         querySnapshot.forEach((doc) => {

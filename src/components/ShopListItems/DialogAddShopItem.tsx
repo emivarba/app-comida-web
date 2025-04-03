@@ -2,7 +2,7 @@
 import {Select, SelectChangeEvent, TextField} from "@mui/material";
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import {addListItem} from "../../utils/ShopListUtils.ts";
 import MenuItem from "@mui/material/MenuItem";
 import { useAppSelector } from "../../utils/hooks.ts";

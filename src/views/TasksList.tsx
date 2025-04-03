@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import Container from "@mui/material/Container";
 import {addTask, deleteTask, fetchTasks, taskInfo} from "../utils/TasksListUtils.ts";
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import "../styles/TasksList/TasksListView.scss"
 import {TextField} from "@mui/material";
 import TasksListElement from "../components/TasksList/TasksListElement.tsx"
