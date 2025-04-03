@@ -2,7 +2,7 @@
 import {SelectChangeEvent, TextField} from "@mui/material";
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import Grid from "@mui/material/Grid2";
+import Grid from "@mui/material/Grid";
 import { GenericDialogForm } from "../Generics/GenericDialogForm.tsx";
 import { addShop } from "../../utils/ShopUtils.ts";
 import { useDispatch } from "react-redux";
