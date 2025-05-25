@@ -10,6 +10,7 @@ import Container from "@mui/material/Container";
 import TasksList from "./views/TasksList.tsx";
 import ShopsView from "./views/ShopsView.tsx";
 import SudokuView from "./views/SudokuView.tsx";
+import ProductPricesView from "./views/ProductPricesView.tsx";
 
 function App() {
     const dispatch = useDispatch()
@@ -43,6 +44,7 @@ function App() {
                 <Route path="/lista-compra" element={<ShoppingListView />} ></Route>
                 <Route path="/tareas" element={<TasksList />} ></Route>
                 <Route path="/sudoku" element={<SudokuView />} ></Route>
+                <Route path="/precios" element={<ProductPricesView />} ></Route>
             </Routes>
         </div>
     );
