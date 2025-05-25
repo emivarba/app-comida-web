@@ -29,16 +29,20 @@ function ProductListItem({product}: ProductListItemParams) {
             <table className="product-list__price-table" border={1} >
                 <thead>
                     <tr>
-                        {Object.keys(product.currentPrices).map(shopName => (
-                            <th>{shopName}</th>
-                        ))}
+                        {
+                            Object.keys(product.currentPrices).map(shopName => (
+                                <th key={shopName}>{shopName}</th>
+                            ))
+                        }
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        {Object.values(product.currentPrices).map(shopPrice => (
-                            <td>{shopPrice}€</td>
-                        ))}
+                        {
+                            Object.values(product.currentPrices).map(shopPrice => (
+                                <td key={shopPrice}>{shopPrice}€</td>
+                            ))
+                        }
                     </tr>
                 </tbody>
             </table>

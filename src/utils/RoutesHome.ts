@@ -12,6 +12,10 @@ export const routes_home_page = [
         name: 'Tareas',
     },
     {
+        path: '/precios',
+        name: 'Precios',
+    },
+    {
         path: '/sudoku',
         name: 'Sudoku',
     },

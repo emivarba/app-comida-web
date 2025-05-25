@@ -32,7 +32,7 @@ function DialogAddProductPrices({openDialog, setOpen, reloadList}: DialogAddShop
 
         return result
 
-    };
+    }
 
     function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
@@ -46,9 +46,9 @@ function DialogAddProductPrices({openDialog, setOpen, reloadList}: DialogAddShop
           setStores(newStores);
           setProductInput({ shop: '', price: '' , productName: productInput.productName});
         } else {
-          alert('La tienda ya existe o el campo está vacío');
+          console.log('La tienda ya existe o el campo está vacío');
         }
-    };
+    }
 
     return(
         <GenericDialogForm
@@ -93,6 +93,15 @@ function DialogAddProductPrices({openDialog, setOpen, reloadList}: DialogAddShop
                         onChange={handleInputChange}
                     ></input>
                     <button className="icon-button" onClick={addProductPrice}><AddIcon /></button>
+                </div>
+
+                <div>
+                    {[...stores].map(([shopName, price]) => (
+                        <div key={shopName}>
+                            <p>{shopName} -{">"} {price}</p>
+                        </div>
+                    ))
+                    }
                 </div>
             </div>
         </GenericDialogForm>
